@@ -1,0 +1,2 @@
+# compose-launchedeffect-key-sample
+Jetpack ComposeのLaunchedEffectにおけるキーごとの挙動を検証するサンプルアプリです。キーの種類による再実行タイミングをログで比較・検証します。
