@@ -69,11 +69,7 @@ fun LaunchedEffectKeyScreen(
 
             Button(
                 onClick = {
-                    text = if (text == "Hello") {
-                        "Compose"
-                    } else {
-                        "Hello"
-                    }
+                    text = nextText(text)
                 }
             ) {
                 Text("Change Text")
@@ -100,7 +96,7 @@ fun LaunchedEffectKeyScreen(
                     }
                 )
 
-                Text(keyType.displayName)
+                Text(keyType.label)
             }
         }
 
@@ -117,76 +113,71 @@ fun LaunchedEffectKeyScreen(
     }
 }
 
+private fun nextText(text: String): String =
+    if (text == "Hello") "Compose" else "Hello"
+
 @Composable
-private fun UnitKeyEffect() {
-    LaunchedEffect(Unit) {
-        Log.d(TAG, "START [Unit]")
+private fun LoggingLaunchedEffect(
+    vararg keys: Any?,
+    name: String,
+    message: String = "",
+) {
+    LaunchedEffect(*keys) {
+        Log.d(TAG, "START [$name]$message")
 
         try {
             delay(10_000.milliseconds)
         } finally {
-            Log.d(TAG, "END   [Unit]")
+            Log.d(TAG, "END   [$name]$message")
         }
     }
+}
+
+@Composable
+private fun UnitKeyEffect() {
+    LoggingLaunchedEffect(
+        Unit,
+        name = "Unit",
+    )
 }
 
 @Composable
 private fun TrueKeyEffect() {
-    LaunchedEffect(true) {
-        Log.d(TAG, "START [true]")
-
-        try {
-            delay(10_000.milliseconds)
-        } finally {
-            Log.d(TAG, "END   [true]")
-        }
-    }
+    LoggingLaunchedEffect(
+        true,
+        name = "true",
+    )
 }
 
 @Composable
-private fun CountKeyEffect(
-    count: Int
-) {
-    LaunchedEffect(count) {
-        Log.d(TAG, "START [Count] count=$count")
-
-        try {
-            delay(10_000.milliseconds)
-        } finally {
-            Log.d(TAG, "END   [Count] count=$count")
-        }
-    }
+private fun CountKeyEffect(count: Int) {
+    LoggingLaunchedEffect(
+        count,
+        name = "Count",
+        message = " count=$count",
+    )
 }
 
 @Composable
-private fun TextKeyEffect(
-    text: String
-) {
-    LaunchedEffect(text) {
-        Log.d(TAG, "START [Text] text=$text")
-
-        try {
-            delay(10_000.milliseconds)
-        } finally {
-            Log.d(TAG, "END   [Text] text=$text")
-        }
-    }
+private fun TextKeyEffect(text: String) {
+    LoggingLaunchedEffect(
+        text,
+        name = "Text",
+        message = " text=$text",
+    )
 }
 
 @Composable
 private fun CountAndTextKeyEffect(
     count: Int,
-    text: String
+    text: String,
 ) {
-    LaunchedEffect(count, text) {
-        Log.d(TAG, "START [Count + Text] count=$count text=$text")
-
-        try {
-            delay(10_000.milliseconds)
-        } finally {
-            Log.d(TAG, "END   [Count + Text] count=$count text=$text")
-        }
-    }
+    LoggingLaunchedEffect(
+        count,
+        text,
+        name = "Count + Text",
+        message = " count=$count text=$text",
+    )
 }
 
 @Preview(showBackground = true)

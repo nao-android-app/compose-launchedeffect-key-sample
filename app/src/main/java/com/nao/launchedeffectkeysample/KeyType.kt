@@ -1,7 +1,7 @@
 package com.nao.launchedeffectkeysample
 
 enum class KeyType(
-    val displayName: String,
+    val label: String,
 ) {
     UNIT("Unit"),
     TRUE("true"),
