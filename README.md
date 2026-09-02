@@ -35,7 +35,7 @@ Jetpack Compose の `LaunchedEffect` のキーによる再実行タイミング�
 
 ## 関連記事
 
-Jetpack ComposeのLaunchedEffectはキーによっていつ再実行される？ログで挙動を検証してみた（Qiita公開後に記事URLを追加）
+[Jetpack ComposeのLaunchedEffectはキーによっていつ再実行される？ログで挙動を検証してみた](https://qiita.com/nao-android/items/5fa6f532bb0f626cf273)
 
 ## ライセンス
 MIT License
